@@ -7,7 +7,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name="efitness_sniper",
-    version="0.5",
+    version="0.6",
     install_requires=[
         'requests==2.23.0',
         'coloredlogs==14.0',
@@ -23,7 +23,7 @@ setup(
     description="eFitness.com.pl Booking sniper",
     entry_points={"console_scripts": ["efitness=efitness_sniper.app:main"],},
     keywords = ['efitness', 'sniper', 'booking', 'bookings'],
-    download_url= "https://github.com/consi/efitness-sniper/archive/0.5.tar.gz",
+    download_url= "https://github.com/consi/efitness-sniper/archive/0.6.tar.gz",
     classifiers=[
         'Development Status :: 4 - Beta', 
         'Intended Audience :: End Users/Desktop', 

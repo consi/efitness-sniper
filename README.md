@@ -21,7 +21,10 @@ login_data:
   password: your_password # specify account password
 
 sniper_rules: # You can define as much rules as you want :)
-  - look_ahead_days: 6 # How much days script should look forward (if bigger - it traverses more calendar pages, so I recommend to set it n+1 day, where n is maximum time before allowed registration)
+# How much days script should look forward (if bigger - it traverses more calendar pages, so I recommend to set it n+1 day
+# where n is maximum time before allowed registration) - minimum here is 3 (due to cancellation policy)
+# lower values will be overriden to 3
+  - look_ahead_days: 6 
     match: "BODY BALL" # Name of training - you can use part of name, eg. BALL will match BODY BALL
     day_of_week: 0 # Specify day of week that you are interrested in (0 - Monday)
     after_hour: 16:00 # Do not book trainings before 4PM

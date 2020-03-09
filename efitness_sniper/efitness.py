@@ -128,6 +128,9 @@ class Client:
                 .split(" - ")[-1]
                 .strip()
             )
+            if not reservation.find("a"):
+                self.log.info(f"Skipping {description} - cancellation time runned out, cannot get SID")
+                continue
             # Get meta:sid as this is training id in calendar
             meta_sid = int(reservation.find("a")["meta:sid"])
             reservation_data = {"time": reservation_time, "description": description}
@@ -217,18 +220,20 @@ class Client:
         """
         # Empty timetable dict
         timetable = {}
-        # Calculate how much days from today needs to be scraped
-        max_look_ahead_days = 0
+        # Calculate how much days from today needs to be scraped - minimum 3
+        max_look_ahead_days = 3
         for rule in booking_rules:
             if rule["look_ahead_days"] > max_look_ahead_days:
                 max_look_ahead_days = rule["look_ahead_days"]
         # Generate timetable entries for given days
         for day in range(max_look_ahead_days):
-            timetable.update(
-                self.get_timetable_items(
-                    datetime.date.today() + datetime.timedelta(days=day)
+            # We don't want to snip dates that should be already booked (or ones that are cancelled)
+            if day >= 2:
+                timetable.update(
+                    self.get_timetable_items(
+                        datetime.date.today() + datetime.timedelta(days=day)
+                    )
                 )
-            )
         matching_events = {}
         # Find rule matching events
         for rule in booking_rules:
