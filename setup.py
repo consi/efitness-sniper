@@ -9,7 +9,7 @@ setup(
     name="efitness_sniper",
     version="0.6",
     install_requires=[
-        'requests==2.23.0',
+        'requests==2.31.0',
         'coloredlogs==14.0',
         'ruamel.yaml==0.16.10',
         'beautifulsoup4==4.8.2'
